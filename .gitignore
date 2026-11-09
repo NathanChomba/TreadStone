@@ -23,3 +23,9 @@ Thumbs.db
 
 # Live demo: remembered admin login for the demo browser
 demo/.admin-profile/
+
+# Local only
+_backup_*/
+*.backup.js
+*.bak
+CLAUDE.md
