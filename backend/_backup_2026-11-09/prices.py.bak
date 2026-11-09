@@ -1,0 +1,66 @@
+"""Metal price providers. Prices are stored in ZMW per gram."""
+
+import json
+import logging
+import random
+import urllib.request
+from decimal import ROUND_HALF_UP, Decimal
+
+from django.conf import settings
+
+from .models import Metal, MetalPrice
+
+logger = logging.getLogger("treadstone.prices")
+
+FOUR_DP = Decimal("0.0001")
+TROY_OUNCE_GRAMS = Decimal("31.1034768")
+
+# Starting points for the simulated feed, USD per gram.
+SIMULATED_BASE_USD = {Metal.GOLD: Decimal("85.00"), Metal.SILVER: Decimal("1.00")}
+
+
+class PriceError(Exception):
+    pass
+
+
+def simulated_price(metal):
+    """Random walk of at most +/-0.5% from the last stored price."""
+    last = MetalPrice.objects.filter(metal=metal).first()
+    if last:
+        base = last.price_per_gram
+    else:
+        base = SIMULATED_BASE_USD[metal] * settings.USD_ZMW_RATE
+    drift = Decimal(str(random.uniform(-0.005, 0.005)))
+    return (base * (1 + drift)).quantize(FOUR_DP, ROUND_HALF_UP)
+
+
+def goldapi_price(metal):
+    """goldapi.io quotes per troy ounce in USD; convert to ZMW per gram."""
+    if not settings.GOLDAPI_KEY:
+        raise PriceError("GOLDAPI_KEY is not set")
+    req = urllib.request.Request(
+        f"https://www.goldapi.io/api/{metal}/USD",
+        headers={"x-access-token": settings.GOLDAPI_KEY, "Accept": "application/json"},
+    )
+    with urllib.request.urlopen(req, timeout=15) as resp:
+        data = json.loads(resp.read())
+    usd_per_oz = Decimal(str(data["price"]))
+    return (usd_per_oz / TROY_OUNCE_GRAMS * settings.USD_ZMW_RATE).quantize(FOUR_DP, ROUND_HALF_UP)
+
+
+PROVIDERS = {"simulated": simulated_price, "goldapi": goldapi_price}
+
+
+def fetch_and_store(metal):
+    name = settings.METAL_PRICE_PROVIDER
+    provider = PROVIDERS.get(name)
+    if provider is None:
+        raise PriceError(f"Unknown METAL_PRICE_PROVIDER '{name}'")
+    price = provider(metal)
+    return MetalPrice.objects.create(metal=metal, price_per_gram=price, source=name)
+
+
+def latest_price(metal):
+    """The most recent stored price, fetching one if none exists yet."""
+    price = MetalPrice.objects.filter(metal=metal).first()
+    return price or fetch_and_store(metal)

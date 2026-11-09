@@ -1,0 +1,25 @@
+# Secrets
+.env
+!.env.example
+
+# Python
+backend/venv/
+__pycache__/
+*.pyc
+backend/staticfiles/
+backend/db.sqlite3
+
+# Node
+node_modules/
+frontend/dist/
+frontend/dev-dist/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Live demo: remembered admin login for the demo browser
+demo/.admin-profile/

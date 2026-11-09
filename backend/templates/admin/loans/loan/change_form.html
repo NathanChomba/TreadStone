@@ -1,0 +1,34 @@
+{% extends "admin/change_form.html" %}
+
+{% block form_top %}
+{% if original %}
+<div class="ts-banner ts-banner--{{ original.status|lower }}">
+  <span class="ts-banner__dot" aria-hidden="true"></span>
+  <div class="ts-banner__text">
+    {% if original.status == "PENDING" %}
+      <span class="ts-banner__title">Pending approval</span>
+      <span class="ts-banner__sub">Requested by {{ original.member.get_full_name|default:original.member.phone }} on {{ original.created_at|date:"j M, H:i" }} from the app. Approving sends K{{ original.principal }} to their mobile money straight away.</span>
+    {% elif original.status == "ACTIVE" %}
+      <span class="ts-banner__title">Active · K{{ original.outstanding }} still owed</span>
+      <span class="ts-banner__sub">Approved by {{ original.reviewed_by.get_full_name|default:original.reviewed_by }} on {{ original.reviewed_at|date:"j M Y, H:i" }}. Disbursement ref {{ original.disbursement_reference }}.</span>
+    {% elif original.status == "REPAID" %}
+      <span class="ts-banner__title">Repaid in full</span>
+      <span class="ts-banner__sub">The {{ original.collateral_grams }} g collateral has been released.</span>
+    {% else %}
+      <span class="ts-banner__title">Rejected</span>
+      <span class="ts-banner__sub">Rejected by {{ original.reviewed_by.get_full_name|default:original.reviewed_by }} on {{ original.reviewed_at|date:"j M Y, H:i" }}. No money was sent and no gold is locked.</span>
+    {% endif %}
+  </div>
+  {% if original.status == "PENDING" and has_change_permission %}
+  <div class="ts-banner__actions">
+    {# These submit the page's own form (it carries the CSRF token) to the decision URLs. #}
+    <button type="submit" class="button ts-button-secondary" formaction="{% url 'admin:loans_loan_reject' original.pk %}" formnovalidate>Reject</button>
+    <button type="submit" class="button" formaction="{% url 'admin:loans_loan_approve' original.pk %}" formnovalidate>Approve &amp; send K{{ original.principal }}</button>
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}
+
+{# Every field is read-only (loans change through approve / reject / repay), so hide the save buttons. #}
+{% block submit_buttons_bottom %}{% endblock %}

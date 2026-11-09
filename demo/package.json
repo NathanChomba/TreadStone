@@ -1,0 +1,7 @@
+{
+  "name": "treadstone-live-demo",
+  "private": true,
+  "description": "Scripted user agents that drive the real Treadstone app in visible browser windows for the defense panel.",
+  "scripts": { "demo": "node agents.js" },
+  "dependencies": { "playwright-core": "1.52.0" }
+}

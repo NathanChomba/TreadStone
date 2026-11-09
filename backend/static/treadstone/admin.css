@@ -1,0 +1,309 @@
+/* Treadstone theme for the Django admin. Tokens follow DESIGN.md section 2. */
+
+:root,
+html[data-theme="light"],
+html[data-theme="dark"] {
+  --ts-page: #FAF8F2;
+  --ts-card: #FFFFFF;
+  --ts-tile: #F7F4EC;
+  --ts-inset: #F4F1E8;
+  --ts-track: #EFEBE1;
+  --ts-line: #E7E2D5;
+  --ts-control: #D9D3C3;
+  --ts-ink: #1C1A14;
+  --ts-ink-2: #5E5848;
+  --ts-ink-3: #6E6857;
+  --ts-gold: #D4A537;
+  --ts-on-gold: #14130D;
+  --ts-gold-text: #8A6410;
+  --ts-gold-hover: #5E430A;
+  --ts-gold-strong: #805A0A;
+  --ts-gold-muted: #7A5C12;
+  --ts-gold-tint: #FBF4E2;
+  --ts-gold-tint-line: #E8D6A6;
+  --ts-gold-chip: #F6EDD3;
+  --ts-positive: #1E7A47;
+  --ts-positive-bg: #E3F4EA;
+  --ts-negative: #B4570F;
+  --ts-negative-bg: #FBEBDD;
+  --ts-info: #2F5AA8;
+  --ts-info-bg: #E6EEFB;
+
+  /* Django admin variables */
+  --primary: var(--ts-gold);
+  --secondary: var(--ts-card);
+  --accent: var(--ts-gold);
+  --primary-fg: var(--ts-on-gold);
+  --body-fg: var(--ts-ink);
+  --body-bg: var(--ts-page);
+  --body-quiet-color: var(--ts-ink-3);
+  --body-medium-color: var(--ts-ink-2);
+  --body-loud-color: var(--ts-ink);
+  --header-color: var(--ts-ink-2);
+  --header-branding-color: var(--ts-ink);
+  --header-bg: var(--ts-card);
+  --header-link-color: var(--ts-gold-text);
+  --breadcrumbs-fg: var(--ts-ink-3);
+  --breadcrumbs-link-fg: var(--ts-gold-text);
+  --breadcrumbs-bg: var(--ts-page);
+  --link-fg: var(--ts-gold-text);
+  --link-hover-color: var(--ts-gold-hover);
+  --link-selected-fg: var(--ts-gold-text);
+  --hairline-color: var(--ts-track);
+  --border-color: var(--ts-line);
+  --error-fg: var(--ts-negative);
+  --message-success-bg: var(--ts-positive-bg);
+  --message-warning-bg: var(--ts-gold-tint);
+  --message-error-bg: var(--ts-negative-bg);
+  --message-info-bg: var(--ts-info-bg);
+  --darkened-bg: var(--ts-tile);
+  --selected-bg: var(--ts-gold-chip);
+  --selected-row: var(--ts-gold-tint);
+  --button-fg: var(--ts-on-gold);
+  --button-bg: var(--ts-gold);
+  --button-hover-bg: #C4952A;
+  --default-button-bg: var(--ts-gold);
+  --default-button-hover-bg: #C4952A;
+  --close-button-bg: var(--ts-track);
+  --close-button-hover-bg: var(--ts-control);
+  --delete-button-bg: var(--ts-negative);
+  --delete-button-hover-bg: #93460B;
+  --object-tools-fg: var(--ts-on-gold);
+  --object-tools-bg: var(--ts-gold);
+  --object-tools-hover-bg: #C4952A;
+  --font-family-primary: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-family-monospace: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  color-scheme: light;
+}
+
+body { background: var(--ts-page); color: var(--ts-ink); font-size: 14px; }
+.theme-toggle { display: none !important; }
+
+/* ---------- Header ---------- */
+#header {
+  background: var(--ts-card);
+  border-bottom: 1px solid var(--ts-line);
+  padding: 12px 32px;
+  color: var(--ts-ink-2);
+}
+#site-name a.ts-brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  color: var(--ts-ink); text-decoration: none;
+  font-family: "Sora", sans-serif; font-weight: 700; font-size: 19px;
+}
+.ts-pill {
+  display: inline-flex; align-items: center; height: 22px; padding: 0 9px;
+  border-radius: 999px; background: var(--ts-gold-chip); color: var(--ts-gold-strong);
+  font-family: "Manrope", sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+#user-tools { font-size: 13px; text-transform: none; letter-spacing: 0; color: var(--ts-ink-2); }
+#user-tools strong { color: var(--ts-ink); }
+#user-tools a, #logout-form button {
+  color: var(--ts-gold-text); border: 0; text-decoration: none; font-weight: 600;
+  font-size: 13px; text-transform: none; letter-spacing: 0;
+}
+#user-tools a:hover, #logout-form button:hover { color: var(--ts-gold-hover); }
+
+/* ---------- Breadcrumbs ---------- */
+div.breadcrumbs {
+  background: var(--ts-page); color: var(--ts-ink-3);
+  border-bottom: 1px solid var(--ts-line); padding: 12px 32px; font-size: 13px;
+}
+div.breadcrumbs a { color: var(--ts-gold-text); }
+
+/* ---------- Page ---------- */
+#content { padding: 28px 32px 48px; }
+#content h1, .main > #content h1 {
+  font-family: "Sora", sans-serif; font-weight: 600; font-size: 28px;
+  letter-spacing: -0.02em; color: var(--ts-ink); margin: 0 0 22px;
+}
+h2, h3 { font-family: "Sora", sans-serif; }
+code, pre, .ts-mono { font-family: "JetBrains Mono", monospace; }
+
+/* ---------- Cards (index modules, fieldsets, recent actions) ---------- */
+.module, #content-related .module, fieldset.module {
+  background: var(--ts-card); border: 1px solid var(--ts-line); border-radius: 16px;
+  overflow: hidden; margin-bottom: 18px; box-shadow: none;
+}
+.module h2, .module caption, .inline-group h2, fieldset.module h2 {
+  background: transparent; color: var(--ts-ink-3);
+  font-family: "Manrope", sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 14px 16px 12px; border-bottom: 1px solid var(--ts-track);
+}
+.module caption a, .module h2 a { color: var(--ts-ink-3); }
+#content-main .module table { width: 100%; }
+.module th, .module td { border-bottom: 1px solid var(--ts-track); padding: 12px 16px; vertical-align: middle; }
+.module tr:last-child th, .module tr:last-child td { border-bottom: 0; }
+.dashboard .module table th { font-weight: 500; font-size: 14px; }
+.dashboard .module table th a { color: var(--ts-ink); }
+.dashboard .module table td { text-align: right; white-space: nowrap; padding-left: 4px; }
+#content-main .app-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0 18px; align-items: start; }
+
+/* Add / Change / View links as pills */
+a.addlink, a.changelink, a.viewlink, .dashboard a.addlink, .dashboard a.changelink {
+  display: inline-flex; align-items: center; height: 28px; padding: 0 12px !important;
+  border-radius: 999px; background-image: none !important;
+  font-size: 12px; font-weight: 700; text-decoration: none;
+}
+a.addlink { background-color: var(--ts-gold-chip); color: var(--ts-gold-strong); }
+a.addlink::before { content: "+ "; white-space: pre; }
+a.changelink, a.viewlink { background-color: var(--ts-track); color: var(--ts-ink-2); }
+a.addlink:hover { background-color: var(--ts-gold-tint-line); color: var(--ts-gold-hover); }
+a.changelink:hover, a.viewlink:hover { background-color: var(--ts-control); color: var(--ts-ink); }
+
+/* Recent actions */
+#recent-actions-module h3 { font-family: "Manrope", sans-serif; font-size: 13px; color: var(--ts-ink-2); padding: 12px 16px 0; }
+#recent-actions-module ul.actionlist { padding: 4px 16px 12px; margin: 0; }
+#recent-actions-module ul.actionlist li {
+  list-style: none; padding: 10px 0 10px 34px; margin: 0; position: relative;
+  border-bottom: 1px solid var(--ts-track); background-image: none !important;
+}
+#recent-actions-module ul.actionlist li:last-child { border-bottom: 0; }
+#recent-actions-module ul.actionlist li::before {
+  position: absolute; left: 0; top: 10px; width: 24px; height: 24px; border-radius: 999px;
+  display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;
+}
+#recent-actions-module li.addlink::before { content: "+"; background: var(--ts-gold-chip); color: var(--ts-gold-strong); }
+#recent-actions-module li.changelink::before { content: "✎"; background: var(--ts-track); color: var(--ts-ink-2); }
+#recent-actions-module li.deletelink::before { content: "×"; background: var(--ts-negative-bg); color: var(--ts-negative); }
+#recent-actions-module li a { color: var(--ts-gold-text); font-weight: 600; }
+#recent-actions-module li.addlink, #recent-actions-module li.changelink, #recent-actions-module li.deletelink {
+  display: block; height: auto; border-radius: 0; background: transparent; font-size: 14px; font-weight: 600; color: var(--ts-ink);
+}
+#recent-actions-module li.deletelink { text-decoration: line-through; color: var(--ts-ink-3); }
+#recent-actions-module .mini { display: block; margin-top: 2px; color: var(--ts-ink-3); font-size: 12px; font-weight: 500; text-decoration: none; }
+
+/* ---------- Buttons ---------- */
+.button, input[type=submit], input[type=button], .submit-row input, a.button, button.button {
+  background: var(--ts-gold); color: var(--ts-on-gold); border: 0; border-radius: 12px;
+  font-family: "Manrope", sans-serif; font-weight: 700; font-size: 14px;
+  padding: 10px 18px; min-height: 40px; cursor: pointer;
+}
+.button:hover, input[type=submit]:hover, input[type=button]:hover { background: #C4952A; }
+#changelist-search input[type=submit], .actions button {
+  background: var(--ts-card); color: var(--ts-ink); border: 1px solid var(--ts-control);
+  border-radius: 12px; min-height: 40px; padding: 0 16px; font-weight: 600; font-family: "Manrope", sans-serif;
+}
+.object-tools a, .object-tools a:link, .object-tools a:visited {
+  background: var(--ts-gold); color: var(--ts-on-gold); border-radius: 999px;
+  padding: 10px 18px; font-size: 13px; font-weight: 700; text-transform: none; letter-spacing: 0;
+}
+.object-tools a:hover { background: #C4952A; }
+.submit-row {
+  background: var(--ts-card); border: 1px solid var(--ts-line); border-radius: 16px;
+  padding: 14px 16px; gap: 10px;
+}
+.submit-row a.deletelink, .submit-row a.closelink {
+  border-radius: 12px; height: auto; padding: 11px 16px; font-weight: 700;
+}
+.submit-row a.deletelink { background: transparent; color: var(--ts-negative); border: 1px solid var(--ts-control); }
+
+/* ---------- Forms ---------- */
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=number],
+input[type=tel], textarea, select, .vTextField {
+  border: 1px solid var(--ts-control); border-radius: 10px; background: var(--ts-card);
+  padding: 8px 12px; min-height: 40px; box-sizing: border-box; font-family: "Manrope", sans-serif;
+  font-size: 14px; color: var(--ts-ink);
+}
+input:focus, textarea:focus, select:focus { border-color: var(--ts-gold); outline: 2px solid var(--ts-gold-tint-line); }
+fieldset .form-row { border-bottom: 1px solid var(--ts-track); padding: 12px 16px; }
+fieldset .form-row:last-child { border-bottom: 0; }
+form .aligned label, .aligned label + p, .aligned .readonly { font-size: 14px; }
+form .aligned label { color: var(--ts-ink); font-weight: 700; }
+.aligned .readonly { color: var(--ts-ink); }
+.help, p.help, form p.help, div.help { color: var(--ts-ink-3); font-size: 13px; }
+
+/* ---------- Change list ---------- */
+#changelist .changelist-form-container { gap: 18px; }
+#toolbar {
+  background: var(--ts-card); border: 1px solid var(--ts-line); border-radius: 16px;
+  padding: 12px; margin-bottom: 12px;
+}
+#toolbar form input[type=text], #searchbar { width: min(480px, 100%); height: 40px; }
+#changelist .actions {
+  background: var(--ts-gold-tint); border: 1px solid var(--ts-gold-tint-line); border-radius: 14px;
+  padding: 10px 14px; margin-bottom: 12px; color: var(--ts-ink-2);
+}
+#changelist .results, #changelist table#result_list {
+  background: var(--ts-card); border: 1px solid var(--ts-line); border-radius: 16px; overflow: auto;
+}
+#result_list { border-collapse: separate; border-spacing: 0; width: 100%; }
+#result_list thead th {
+  background: var(--ts-tile); color: var(--ts-ink-3); border-bottom: 1px solid var(--ts-line);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 14px;
+}
+#result_list thead th.sorted { background: var(--ts-gold-tint); }
+#result_list thead th a { color: var(--ts-ink-3); }
+#result_list tbody td, #result_list tbody th { padding: 12px 14px; border-bottom: 1px solid var(--ts-track); font-size: 14px; vertical-align: middle; }
+#result_list tbody tr:last-child td, #result_list tbody tr:last-child th { border-bottom: 0; }
+#result_list tbody th a { color: var(--ts-ink); font-weight: 700; }
+#result_list tbody tr.selected { background: var(--ts-gold-tint); }
+#result_list td.field-gold_share, #result_list th.column-gold_share,
+#result_list td.field-principal, #result_list td.field-total_due, #result_list td.field-amount_repaid,
+#result_list td.field-collateral_grams { text-align: right; font-family: "JetBrains Mono", monospace; font-weight: 600; }
+p.paginator { border: 0; background: transparent; color: var(--ts-ink-3); padding: 14px 0; }
+.paginator a:link, .paginator a:visited, .paginator .this-page {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 32px; height: 32px;
+  border-radius: 8px; border: 1px solid var(--ts-line); background: var(--ts-card); color: var(--ts-ink); padding: 0 6px;
+}
+.paginator .this-page { background: var(--ts-gold); color: var(--ts-on-gold); border-color: var(--ts-gold); }
+
+/* Filter sidebar */
+#changelist-filter {
+  background: var(--ts-card); border: 1px solid var(--ts-line); border-radius: 16px; overflow: hidden;
+}
+#changelist-filter h2 {
+  background: transparent; color: var(--ts-ink-3); font-family: "Manrope", sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 14px 16px; border-bottom: 1px solid var(--ts-track);
+}
+#changelist-filter h3, #changelist-filter summary { font-family: "Manrope", sans-serif; font-size: 13px; font-weight: 700; color: var(--ts-ink); padding: 0 16px; }
+#changelist-filter li { padding: 0; margin: 0; }
+#changelist-filter li a { display: block; padding: 8px 16px; color: var(--ts-ink-2); border-left: 3px solid transparent; }
+#changelist-filter li.selected a { background: var(--ts-gold-tint); color: var(--ts-ink); font-weight: 700; border-left-color: var(--ts-gold); }
+#changelist-filter-extra-actions a, #changelist-filter #changelist-filter-clear a { color: var(--ts-gold-text); }
+
+/* ---------- Chips and figures used by list_display / readonly fields ---------- */
+.ts-chip {
+  display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 999px;
+  font-size: 12px; font-weight: 700; white-space: nowrap;
+}
+.ts-chip--positive { background: var(--ts-positive-bg); color: var(--ts-positive); }
+.ts-chip--gold { background: var(--ts-gold-chip); color: var(--ts-gold-strong); }
+.ts-chip--negative { background: var(--ts-negative-bg); color: var(--ts-negative); }
+.ts-chip--neutral { background: var(--ts-track); color: var(--ts-ink-2); }
+.ts-chip--info { background: var(--ts-info-bg); color: var(--ts-info); }
+.ts-mono { font-family: "JetBrains Mono", monospace; font-weight: 500; letter-spacing: 0.01em; }
+.ts-muted { color: var(--ts-ink-3); }
+
+.ts-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; padding: 14px 16px; }
+.ts-tile { background: var(--ts-tile); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+.ts-tile--gold { background: var(--ts-gold-tint); border: 1px solid var(--ts-gold-tint-line); }
+.ts-tile__label { font-size: 12px; color: var(--ts-ink-3); }
+.ts-tile--gold .ts-tile__label { color: var(--ts-gold-muted); }
+.ts-tile__value { font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 18px; color: var(--ts-ink); }
+.ts-tile--gold .ts-tile__value { color: var(--ts-gold-strong); }
+
+/* Status banner on the loan page */
+.ts-banner {
+  display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap;
+  border-radius: 16px; padding: 14px 16px; margin-bottom: 18px; border: 1px solid var(--ts-line); background: var(--ts-card);
+}
+.ts-banner--pending { background: var(--ts-gold-tint); border-color: var(--ts-gold-tint-line); }
+.ts-banner--active, .ts-banner--repaid { background: var(--ts-positive-bg); border-color: #BFE3CD; }
+.ts-banner--rejected { background: var(--ts-negative-bg); border-color: #F0CDAF; }
+.ts-banner__dot { width: 10px; height: 10px; border-radius: 999px; background: var(--ts-gold); margin-top: 5px; flex-shrink: 0; }
+.ts-banner--active .ts-banner__dot, .ts-banner--repaid .ts-banner__dot { background: var(--ts-positive); }
+.ts-banner--rejected .ts-banner__dot { background: var(--ts-negative); }
+.ts-banner__text { flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px; }
+.ts-banner__title { font-weight: 700; color: var(--ts-ink); }
+.ts-banner__sub { font-size: 13px; color: var(--ts-ink-2); }
+.ts-banner__actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.ts-banner__actions .button { min-height: 44px; }
+.ts-banner__actions .ts-button-secondary { background: var(--ts-card); color: var(--ts-negative); border: 1px solid var(--ts-control); }
+.ts-banner__actions .ts-button-secondary:hover { background: var(--ts-tile); }
+
+/* Footer line */
+#footer { border-top: 0; }

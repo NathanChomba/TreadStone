@@ -1,0 +1,28 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | Treadstone admin{% endblock %}
+
+{# Light theme only: the design has no dark variant, so drop Django's dark-mode variables. #}
+{% block dark-mode-vars %}{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="{% static 'treadstone/admin.css' %}">
+{% endblock %}
+
+{% block branding %}
+<div id="site-name">
+  <a href="{% url 'admin:index' %}" class="ts-brand">
+    <svg width="26" height="26" viewBox="0 0 32 32" fill="none" stroke="#D4A537" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M16 2.5l11.7 6.75v13.5L16 29.5 4.3 22.75V9.25z"/><path d="M10.5 11.5h11M16 11.5v10"/></svg>
+    <span>Treadstone</span>
+    <span class="ts-pill">Admin</span>
+  </a>
+</div>
+{% endblock %}
+
+{% block welcome-msg %}Welcome, <strong>{% firstof user.first_name user.get_username %}</strong>{% endblock %}
+
+{% block nav-global %}{% endblock %}

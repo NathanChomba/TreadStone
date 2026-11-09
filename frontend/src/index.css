@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+/* Tokens from DESIGN.md section 11. */
+@theme {
+  --font-display: "Sora", sans-serif;
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-page: #FAF8F2;
+  --color-card: #FFFFFF;
+  --color-tile: #F7F4EC;
+  --color-inset: #F4F1E8;
+  --color-track: #EFEBE1;
+  --color-line: #E7E2D5;
+  --color-control: #D9D3C3;
+  --color-disabled: #B5AE9A;
+
+  --color-ink: #1C1A14;
+  --color-ink-2: #5E5848;
+  --color-ink-3: #6E6857;
+
+  --color-gold: #D4A537;
+  --color-gold-hover: #C4952A;
+  --color-on-gold: #14130D;
+  --color-gold-text: #8A6410;
+  --color-gold-text-hover: #5E430A;
+  --color-gold-strong: #805A0A;
+  --color-gold-muted: #7A5C12;
+  --color-gold-tint: #FBF4E2;
+  --color-gold-tint-line: #E8D6A6;
+  --color-gold-chip: #F6EDD3;
+
+  --color-positive: #1E7A47;
+  --color-positive-bg: #E3F4EA;
+  --color-negative: #B4570F;
+  --color-negative-bg: #FBEBDD;
+  --color-info: #2F5AA8;
+  --color-info-bg: #E6EEFB;
+  --color-silver: #9AA1AB;
+
+  --radius-card: 20px;
+  --radius-tile: 14px;
+  --radius-control: 12px;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-page font-sans text-ink antialiased;
+  font-size: 15px;
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.eyebrow {
+  @apply text-xs font-semibold uppercase text-ink-3;
+  letter-spacing: 0.08em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
